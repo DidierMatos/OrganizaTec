@@ -3,7 +3,7 @@ package com.example.kys.organizatec;
 import java.io.Serializable;
 
 /**
- * Created by didie on 14/03/2018.
+ * Created by Didier on 14/03/2018.
  */
 
 public class ClsInfoLogin implements Serializable{
