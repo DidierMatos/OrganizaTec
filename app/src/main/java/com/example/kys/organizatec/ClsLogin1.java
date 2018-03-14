@@ -1,6 +1,8 @@
 package com.example.kys.organizatec;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener{
 
@@ -53,14 +56,39 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         adapter3.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         cmbsemestre.setAdapter(adapter3);
 
+        consultarListaPersona();
+
         cmbunidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                String texto="";
+
+/*                ClsConexionDbHelper conn = new ClsConexionDbHelper(ClsLogin1.this);
+                SQLiteDatabase database = conn.getReadableDatabase();
+                Cursor Unidad1 = database.rawQuery("select unid_ac.Nombre_unid from unid_ac",null);
+
                 //Aqui se realizarian las acciones con la base de datos
+                if (Unidad1.moveToFirst()){
+                    String select = cmbunidad.getSelectedItem().toString();
+                    if (select.equals("Felipe Carrillo Puerto")){
+
+                        //###########PRUEBAAAA#################
+                        do {
+                            texto = texto + Unidad1.getString(0);
+                        }while (Unidad1.moveToNext());
+                        //card_text2.setText(texto);
+                        Toast.makeText(ClsLogin1.this,texto, Toast.LENGTH_LONG).show();
+                        //###########PRUEBAAAA#################
+
+                    }
+
+                }*/
+
                 String select = cmbunidad.getSelectedItem().toString();
                 if (select.equals("Felipe Carrillo Puerto")){
+
 
                 }
 
@@ -165,6 +193,13 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
             }
         });
+
+    }
+
+    private void consultarListaPersona() {
+
+        
+
     }
 
     @Override
@@ -177,5 +212,6 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         }
 
     }
+
 
 }
