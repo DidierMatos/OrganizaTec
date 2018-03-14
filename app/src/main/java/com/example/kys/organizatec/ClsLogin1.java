@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,7 +25,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lytclslogin2);
+        setContentView(R.layout.lytclslogin1);
 
         conn = new ClsConexionDbHelper(ClsLogin1.this);
         SQLiteDatabase database = conn.getReadableDatabase();
@@ -95,7 +94,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.continuar:
-                Intent intent = new Intent(ClsLogin1.this, ClsHorario.class);
+                Intent intent = new Intent(ClsLogin1.this, ClsLogin2.class);
                 startActivity(intent);
         }
 

@@ -19,7 +19,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lytclslogin1);
+        setContentView(R.layout.lytclslogin2);
 
         nombre = (EditText)findViewById(R.id.editNombre);
         finalizar = (Button)findViewById(R.id.btnFinalizar);
