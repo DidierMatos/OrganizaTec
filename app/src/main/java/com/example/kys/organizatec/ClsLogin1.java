@@ -52,7 +52,14 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                 //String selected = parent.getItemAtPosition(0).toString();
 
                 if (position==1){
-                    Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+
+                }
+
+                switch(position){
+                    case 1:
+                        Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+                        break;
                 }
 
             }
