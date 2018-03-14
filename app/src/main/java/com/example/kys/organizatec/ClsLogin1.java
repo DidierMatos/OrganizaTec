@@ -34,7 +34,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         carreraspinner = (Spinner) findViewById(R.id.spnCarrera);
         semestrespinner = (Spinner) findViewById(R.id.spnSemestre);
 
-        continuar = (Button) findViewById(R.id.btnIniciar);
+        continuar = (Button) findViewById(R.id.continuar);
+        continuar.setOnClickListener(this);
 
 
         consultarListaPersona();
@@ -94,7 +95,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.continuar:
-                Intent intent = new Intent(ClsLogin1.this, ClsLogin2.class);
+                Intent intent = new Intent(ClsLogin1.this, ClsHorario.class);
                 startActivity(intent);
         }
 
