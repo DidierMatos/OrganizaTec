@@ -12,15 +12,21 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener{
 
     private Button continuar;
     private Spinner unidadspinner, carreraspinner, semestrespinner;
+    private ArrayList<String> listaPersonas;
+    private Array<Usuario> personasList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lytclslogin2);
+
+
 
         consultarListaPersona();
 
