@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,12 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         unidadspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SQLiteDatabase db = conn.getReadableDatabase();
+                //String selected = parent.getItemAtPosition(0).toString();
+
+                if (position==1){
+                    Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+                }
 
             }
 
