@@ -21,6 +21,10 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
     private Spinner unidadspinner, carreraspinner, semestrespinner;
     private ArrayList<String> listaUnidades;
     private ArrayList<ClsInfoLogin> unidadesList;
+    private ArrayList<String> listaCarreras;
+    private ArrayList<ClsInfoLogin> carrerasList;
+    private ArrayList<String> listaSemestre;
+    private ArrayList<ClsInfoLogin> semestreList;
     private ClsConexionDbHelper conn;
 
     @Override
@@ -40,12 +44,12 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
 
         consultarListaUnidades();
+        consultarListaCarreras();
 
 
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaUnidades);
         unidadspinner.setAdapter(adaptador);
-        ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaUnidades);
-        carreraspinner.setAdapter(adaptador2);
+
 
         unidadspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -59,6 +63,21 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
                     case 1:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+                        desplegarLista();
+
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
 
                         break;
                     case 2:
@@ -110,6 +129,52 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
             listaUnidades.add((unidadesList.get(i).getUnidad()));
         }
     }
+
+    private void consultarListaCarreras() {
+
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        carrerasList = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select carreras.Nombre_carr\n" +
+                "from unid_ac, carreras\n" +
+                "where unid_ac.id_unid_ac = carreras.id_unid_ac\n" +
+                " and unid_ac.id_unid_ac='1'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setCarrera(cursor.getString(0));
+
+            Log.i("Unidad",info.getCarrera().toString());
+
+            carrerasList.add(info);
+
+        }
+
+        obtenerLista2();
+
+    }
+
+    private void obtenerLista2() {
+
+        listaCarreras = new ArrayList<String>();
+        listaCarreras.add("Seleccione una carrera");
+
+        for(int i=0; i<carrerasList.size();i++){
+
+            listaCarreras.add((carrerasList.get(i).getCarrera()));
+        }
+    }
+
+    private void desplegarLista(){
+
+        ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarreras);
+        carreraspinner.setAdapter(adaptador2);
+
+    }
+
+
 
     @Override
     public void onClick(View view) {
