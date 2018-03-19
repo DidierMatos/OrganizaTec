@@ -74,22 +74,125 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                     case 1:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
                         desplegarListaCarrerasFCP();
-                        listaSemestreGral();
+
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1: //IA
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 2: //ISC
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 3: //II
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 4://IIA
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 5://IGE
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+
                         break;
                     case 2:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 2", Toast.LENGTH_LONG).show();
                         desplegarListaCarrerasTulum();
-                        listaSemestreGral();
+
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1: //IG
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 2: //SI SE AGREGA UNO NUEVO
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
                         break;
                     case 3:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 3", Toast.LENGTH_LONG).show();
                         desplegarListaCarrerasTiho();
-                        listaSemestreGral();
+
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1: //IG
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 2: //SEGUNDA OPCION SI SE AÑADE
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
                         break;
                     case 4:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 4", Toast.LENGTH_LONG).show();
                         desplegarListaCarrerasChunh();
-                        listaSemestreGral();
+
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1: //ISC
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 2: //IGE
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                    case 3: //POR SI SE AGREGA MAS ADELANTE
+                                        desplegarListaSemestre();
+                                        seleccionarSemestre();
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
                         break;
                 }
 
@@ -268,96 +371,6 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private void listaSemestreGral(){
-
-        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position){
-                    case 1:
-                        desplegarListaSemestre();
-
-                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position) {
-                                    case 1:case 2:case 3:case 4:
-                                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-                        break;
-                    case 2:
-                        desplegarListaSemestre();
-                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position) {
-                                    case 1:case 2:case 3:case 4:
-                                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-
-                        break;
-                    case 3:
-                        desplegarListaSemestre();
-                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position) {
-                                    case 1:case 2:case 3:case 4:
-                                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-
-                        break;
-                    case 4:
-                        desplegarListaSemestre();
-                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position) {
-                                    case 1:case 2:case 3:case 4:
-                                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-
-                        break;
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-    }
-
     private void desplegarListaCarrerasTiho(){
 
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarrerasTiho);
@@ -456,6 +469,23 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         ArrayAdapter<CharSequence> adaptador3 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaSemestre);
         semestrespinner.setAdapter(adaptador3);
 
+    }
+
+    private void seleccionarSemestre(){
+        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch(position) {
+                    case 1:case 2:case 3:case 4:
+                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 
