@@ -9,8 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener{
+import java.io.Serializable;
+
+public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener,Serializable{
     private String nom;
     private EditText nombre;
     private Button finalizar;
@@ -104,7 +107,8 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
         } else
         {
-            Intent intent = new Intent(ClsLogin2.this, ClsMainActivity.class);
+            //Toast.makeText(ClsLogin2.this,"Tu nombre es: " + nom, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ClsLogin2.this, ClsHorario.class);
             startActivity(intent);
         }
     }
