@@ -52,6 +52,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         consultarListaUnidades();
         consultarListaCarrerasFCP();
         consultarListaCarrerasTulum();
+        consultarListaCarrerasTiho();
+        consultarListaCarrerasChunh();
         consultarListaSemestre();
 
 
@@ -146,8 +148,78 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                         break;
                     case 3:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 3", Toast.LENGTH_LONG).show();
+                        desplegarListaCarrerasTiho();
+
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1:
+                                        desplegarListaSemestre();
+
+                                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                switch(position) {
+                                                    case 1:case 2:case 3:case 4:
+                                                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> parent) {
+
+                                            }
+                                        });
+                                        break;
+                                }
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+                        break;
                     case 4:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 4", Toast.LENGTH_LONG).show();
+                        desplegarListaCarrerasChunh();
+
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1:
+                                        desplegarListaSemestre();
+
+                                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                switch(position) {
+                                                    case 1:case 2:case 3:case 4:
+                                                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> parent) {
+
+                                            }
+                                        });
+                                        break;
+                                }
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+                        break;
                 }
 
             }
@@ -210,7 +282,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
             //info.setId(cursor.getInt(0));
             info.setCarrera(cursor.getString(0));
 
-            Log.i("Unidad",info.getCarrera().toString());
+            Log.i("Carrera",info.getCarrera().toString());
 
             carrerasListFCP.add(info);
 
@@ -257,7 +329,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
             //info.setId(cursor.getInt(0));
             info.setCarrera(cursor.getString(0));
 
-            Log.i("Unidad",info.getCarrera().toString());
+            Log.i("Carrera",info.getCarrera().toString());
 
             carrerasListTulum.add(info);
 
@@ -288,8 +360,96 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
 
     //#########################TIHOSUCO#####################//
+    private void consultarListaCarrerasTiho() {
 
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        carrerasListTiho = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select carreras.Nombre_carr\n" +
+                "from unid_ac, carreras\n" +
+                "where unid_ac.id_unid_ac = carreras.id_unid_ac\n" +
+                " and unid_ac.id_unid_ac='3'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setCarrera(cursor.getString(0));
+
+            Log.i("Carrera",info.getCarrera().toString());
+
+            carrerasListTiho.add(info);
+
+        }
+
+        obtenerListaCarrerasTiho();
+
+    }
+
+    private void obtenerListaCarrerasTiho() {
+
+        listaCarrerasTiho = new ArrayList<String>();
+        listaCarrerasTiho.add("Seleccione una carrera");
+
+        for(int i=0; i<carrerasListTiho.size();i++){
+
+            listaCarrerasTiho.add((carrerasListTiho.get(i).getCarrera()));
+        }
+    }
+
+    private void desplegarListaCarrerasTiho(){
+
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarrerasTiho);
+        carreraspinner.setAdapter(adaptador);
+
+    }
     //#########################FIN TIHOSUCO#####################//
+
+    //#########################CHUNHUHUB#####################//
+    private void consultarListaCarrerasChunh() {
+
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        carrerasListChunh = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select carreras.Nombre_carr\n" +
+                "from unid_ac, carreras\n" +
+                "where unid_ac.id_unid_ac = carreras.id_unid_ac\n" +
+                " and unid_ac.id_unid_ac='4'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setCarrera(cursor.getString(0));
+
+            Log.i("Carrera",info.getCarrera().toString());
+
+            carrerasListChunh.add(info);
+
+        }
+
+        obtenerListaCarrerasChunh();
+
+    }
+
+    private void obtenerListaCarrerasChunh() {
+
+        listaCarrerasChunh = new ArrayList<String>();
+        listaCarrerasChunh.add("Seleccione una carrera");
+
+        for(int i=0; i<carrerasListChunh.size();i++){
+
+            listaCarrerasChunh.add((carrerasListChunh.get(i).getCarrera()));
+        }
+    }
+
+    private void desplegarListaCarrerasChunh(){
+
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarrerasChunh);
+        carreraspinner.setAdapter(adaptador);
+
+    }
+    //#########################FIN CHUNHUHUB#####################//
 
 
     private void consultarListaSemestre() {
@@ -309,7 +469,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
             //info.setId(cursor.getInt(0));
             info.setSemestre(cursor.getString(0));
 
-            Log.i("Unidad",info.getSemestre().toString());
+            Log.i("Semestre",info.getSemestre().toString());
 
             semestreList.add(info);
 
