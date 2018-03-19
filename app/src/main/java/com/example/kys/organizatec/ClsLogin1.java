@@ -63,13 +63,13 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
         unidadspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int positionunidad, long id) {
                 //SQLiteDatabase db = conn.getReadableDatabase();
                 //String selected = parent.getItemAtPosition(0).toString();
 /*              if (position==1){
                     //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
                 }*/
-                switch(position){
+                switch(positionunidad){
 
                     case 1:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
@@ -77,8 +77,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
                         carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position){
+                            public void onItemSelected(AdapterView<?> parent, View view, int pos_car_fcp, long id) {
+                                switch(pos_car_fcp){
                                     case 1: //IA
                                         desplegarListaSemestre();
                                         seleccionarSemestre();
@@ -118,8 +118,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
                         carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position){
+                            public void onItemSelected(AdapterView<?> parent, View view, int pos_car_tulum, long id) {
+                                switch(pos_car_tulum){
                                     case 1: //IG
                                         desplegarListaSemestre();
                                         seleccionarSemestre();
@@ -144,8 +144,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
                         carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position){
+                            public void onItemSelected(AdapterView<?> parent, View view, int pos_car_tiho, long id) {
+                                switch(pos_car_tiho){
                                     case 1: //IG
                                         desplegarListaSemestre();
                                         seleccionarSemestre();
@@ -170,8 +170,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
                         carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch(position){
+                            public void onItemSelected(AdapterView<?> parent, View view, int pos_car_chunh, long id) {
+                                switch(pos_car_chunh){
                                     case 1: //ISC
                                         desplegarListaSemestre();
                                         seleccionarSemestre();
@@ -474,8 +474,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
     private void seleccionarSemestre(){
         semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+            public void onItemSelected(AdapterView<?> parent, View view, int positionsemestre, long id) {
+                switch(positionsemestre) {
                     case 1:case 2:case 3:case 4:
                         Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
                 }
