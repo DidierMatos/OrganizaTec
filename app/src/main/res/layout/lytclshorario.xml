@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.kys.organizatec.ClsHorario">
 
+    <TextView
+        android:id="@+id/pruebaTxtVw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TextView"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="141dp" />
 </android.support.constraint.ConstraintLayout>
