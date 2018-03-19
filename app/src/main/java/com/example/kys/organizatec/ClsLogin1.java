@@ -45,6 +45,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
         consultarListaUnidades();
         consultarListaCarreras();
+        consultarListaSemestre();
 
 
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaUnidades);
@@ -63,12 +64,31 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
                     case 1:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
-                        desplegarLista();
+                        desplegarListaCarreras();
 
                         carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1:
+                                        desplegarListaSemestre();
 
+                                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                switch(position) {
+                                                    case 1:case 2:case 3:case 4:
+                                                    Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> parent) {
+
+                                            }
+                                        });
+                                    break;
+                                }
 
                             }
 
@@ -82,6 +102,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                         break;
                     case 2:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 2", Toast.LENGTH_LONG).show();
+                        
                     case 3:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 3", Toast.LENGTH_LONG).show();
                     case 4:
@@ -115,11 +136,11 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
         }
 
-        obtenerLista();
+        obtenerListaUnidades();
 
     }
 
-    private void obtenerLista() {
+    private void obtenerListaUnidades() {
 
         listaUnidades = new ArrayList<String>();
         listaUnidades.add("Seleccione una unidad");
@@ -152,11 +173,11 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
         }
 
-        obtenerLista2();
+        obtenerListaCarreras();
 
     }
 
-    private void obtenerLista2() {
+    private void obtenerListaCarreras() {
 
         listaCarreras = new ArrayList<String>();
         listaCarreras.add("Seleccione una carrera");
@@ -167,13 +188,57 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private void desplegarLista(){
+    private void desplegarListaCarreras(){
 
         ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarreras);
         carreraspinner.setAdapter(adaptador2);
 
     }
 
+    private void consultarListaSemestre() {
+
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        semestreList = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select semestre.descripcion\n" +
+                "from carreras,semestre\n" +
+                "where semestre.id_semestre = carreras.id_Carreras\n" +
+                " and semestre.id_semestre != '1'\n" + "and semestre.id_semestre !='3'\n"
+                + " and semestre.id_semestre != '5'\n" + "and semestre.id_semestre !='7'\n",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setSemestre(cursor.getString(0));
+
+            Log.i("Unidad",info.getSemestre().toString());
+
+            semestreList.add(info);
+
+        }
+
+        obtenerListaSemestre();
+
+    }
+
+    private void obtenerListaSemestre() {
+
+        listaSemestre= new ArrayList<String>();
+        listaSemestre.add("Seleccione un semestre");
+
+        for(int i=0; i<semestreList.size();i++){
+
+            listaSemestre.add((semestreList.get(i).getSemestre()));
+        }
+    }
+
+    private void desplegarListaSemestre(){
+
+        ArrayAdapter<CharSequence> adaptador3 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaSemestre);
+        semestrespinner.setAdapter(adaptador3);
+
+    }
 
 
     @Override

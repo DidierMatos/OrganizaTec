@@ -10,7 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 public class ClsConexionDbHelper extends SQLiteAssetHelper {
 
-    private static final String DATABASE_NAME = "DB_PROYECTO.db";
+    private static final String DATABASE_NAME = "DB_PROYECTOV3.db";
     private static final int DATABASE_VERSION = 1;
 
     public ClsConexionDbHelper(Context context) {
