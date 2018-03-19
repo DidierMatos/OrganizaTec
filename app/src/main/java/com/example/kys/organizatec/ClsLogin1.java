@@ -102,6 +102,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                         break;
                     case 2:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 2", Toast.LENGTH_LONG).show();
+                        
 
                     case 3:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 3", Toast.LENGTH_LONG).show();
@@ -201,7 +202,50 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
     //#########################TULUM#####################//
 
-    
+    private void consultarListaCarrerasTulum() {
+
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        carrerasList = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select carreras.Nombre_carr\n" +
+                "from unid_ac, carreras\n" +
+                "where unid_ac.id_unid_ac = carreras.id_unid_ac\n" +
+                " and unid_ac.id_unid_ac='1'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setCarrera(cursor.getString(0));
+
+            Log.i("Unidad",info.getCarrera().toString());
+
+            carrerasList.add(info);
+
+        }
+
+        obtenerListaCarrerasTulum();
+
+    }
+
+    private void obtenerListaCarrerasTulum() {
+
+        listaCarreras = new ArrayList<String>();
+        listaCarreras.add("Seleccione una carrera");
+
+        for(int i=0; i<carrerasList.size();i++){
+
+            listaCarreras.add((carrerasList.get(i).getCarrera()));
+        }
+    }
+
+    private void desplegarListaCarrerasTulum(){
+
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarreras);
+        carreraspinner.setAdapter(adaptador);
+
+    }
+
 
     //#########################FIN TULUM#####################//
 
