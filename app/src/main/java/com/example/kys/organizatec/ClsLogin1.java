@@ -19,8 +19,8 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
     private Button continuar;
     private Spinner unidadspinner, carreraspinner, semestrespinner;
-    private ArrayList<String> listaPersonas;
-    private ArrayList<ClsInfoLogin> personasList;
+    private ArrayList<String> listaUnidades;
+    private ArrayList<ClsInfoLogin> unidadesList;
     private ClsConexionDbHelper conn;
 
     @Override
@@ -39,27 +39,34 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         continuar.setOnClickListener(this);
 
 
-        consultarListaPersona();
+        consultarListaUnidades();
 
 
-        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaPersonas);
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaUnidades);
         unidadspinner.setAdapter(adaptador);
+        ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaUnidades);
+        carreraspinner.setAdapter(adaptador2);
 
         unidadspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SQLiteDatabase db = conn.getReadableDatabase();
+                //SQLiteDatabase db = conn.getReadableDatabase();
                 //String selected = parent.getItemAtPosition(0).toString();
-
-                if (position==1){
+/*              if (position==1){
                     //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
-
-                }
-
+                }*/
                 switch(position){
+
                     case 1:
-                        Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+
                         break;
+                    case 2:
+                        //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 2", Toast.LENGTH_LONG).show();
+                    case 3:
+                        //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 3", Toast.LENGTH_LONG).show();
+                    case 4:
+                        //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 4", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -71,11 +78,11 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         });
     }
 
-    private void consultarListaPersona() {
+    private void consultarListaUnidades() {
         SQLiteDatabase db = conn.getReadableDatabase();
 
         ClsInfoLogin info = null;
-        personasList = new ArrayList<ClsInfoLogin>();
+        unidadesList = new ArrayList<ClsInfoLogin>();
         Cursor cursor = db.rawQuery("SELECT unid_ac.Nombre_unid FROM unid_ac",null);
 
         while(cursor.moveToNext()){
@@ -85,7 +92,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
             Log.i("Unidad",info.getUnidad().toString());
 
-            personasList.add(info);
+            unidadesList.add(info);
 
         }
 
@@ -95,12 +102,12 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
     private void obtenerLista() {
 
-        listaPersonas = new ArrayList<String>();
-        listaPersonas.add("Seleccione una unidad");
+        listaUnidades = new ArrayList<String>();
+        listaUnidades.add("Seleccione una unidad");
 
-        for(int i=0; i<personasList.size();i++){
+        for(int i=0; i<unidadesList.size();i++){
 
-            listaPersonas.add((personasList.get(i).getUnidad()));
+            listaUnidades.add((unidadesList.get(i).getUnidad()));
         }
     }
 
