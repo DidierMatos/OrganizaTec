@@ -21,8 +21,14 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
     private Spinner unidadspinner, carreraspinner, semestrespinner;
     private ArrayList<String> listaUnidades;
     private ArrayList<ClsInfoLogin> unidadesList;
-    private ArrayList<String> listaCarreras;
-    private ArrayList<ClsInfoLogin> carrerasList;
+    private ArrayList<String> listaCarrerasFCP;
+    private ArrayList<ClsInfoLogin> carrerasListFCP;
+    private ArrayList<String> listaCarrerasTulum;
+    private ArrayList<ClsInfoLogin> carrerasListTulum;
+    private ArrayList<String> listaCarrerasTiho;
+    private ArrayList<ClsInfoLogin> carrerasListTiho;
+    private ArrayList<String> listaCarrerasChunh;
+    private ArrayList<ClsInfoLogin> carrerasListChunh;
     private ArrayList<String> listaSemestre;
     private ArrayList<ClsInfoLogin> semestreList;
     private ClsConexionDbHelper conn;
@@ -45,6 +51,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
         consultarListaUnidades();
         consultarListaCarrerasFCP();
+        consultarListaCarrerasTulum();
         consultarListaSemestre();
 
 
@@ -102,8 +109,41 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                         break;
                     case 2:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 2", Toast.LENGTH_LONG).show();
-                        
+                        desplegarListaCarrerasTulum();
 
+                        carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                switch(position){
+                                    case 1:
+                                        desplegarListaSemestre();
+
+                                        semestrespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                switch(position) {
+                                                    case 1:case 2:case 3:case 4:
+                                                        Toast.makeText(ClsLogin1.this, "Seleccionaste la opcion 1,2,3 o 4", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> parent) {
+
+                                            }
+                                        });
+                                        break;
+                                }
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+                        break;
                     case 3:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 3", Toast.LENGTH_LONG).show();
                     case 4:
@@ -159,7 +199,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         SQLiteDatabase db = conn.getReadableDatabase();
 
         ClsInfoLogin info = null;
-        carrerasList = new ArrayList<ClsInfoLogin>();
+        carrerasListFCP = new ArrayList<ClsInfoLogin>();
         Cursor cursor = db.rawQuery("select carreras.Nombre_carr\n" +
                 "from unid_ac, carreras\n" +
                 "where unid_ac.id_unid_ac = carreras.id_unid_ac\n" +
@@ -172,7 +212,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
             Log.i("Unidad",info.getCarrera().toString());
 
-            carrerasList.add(info);
+            carrerasListFCP.add(info);
 
         }
 
@@ -182,18 +222,18 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
     private void obtenerListaCarrerasFCP() {
 
-        listaCarreras = new ArrayList<String>();
-        listaCarreras.add("Seleccione una carrera");
+        listaCarrerasFCP = new ArrayList<String>();
+        listaCarrerasFCP.add("Seleccione una carrera");
 
-        for(int i=0; i<carrerasList.size();i++){
+        for(int i=0; i<carrerasListFCP.size();i++){
 
-            listaCarreras.add((carrerasList.get(i).getCarrera()));
+            listaCarrerasFCP.add((carrerasListFCP.get(i).getCarrera()));
         }
     }
 
     private void desplegarListaCarrerasFCP(){
 
-        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarreras);
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarrerasFCP);
         carreraspinner.setAdapter(adaptador);
 
     }
@@ -201,17 +241,16 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
 
     //#########################TULUM#####################//
-
     private void consultarListaCarrerasTulum() {
 
         SQLiteDatabase db = conn.getReadableDatabase();
 
         ClsInfoLogin info = null;
-        carrerasList = new ArrayList<ClsInfoLogin>();
+        carrerasListTulum = new ArrayList<ClsInfoLogin>();
         Cursor cursor = db.rawQuery("select carreras.Nombre_carr\n" +
                 "from unid_ac, carreras\n" +
                 "where unid_ac.id_unid_ac = carreras.id_unid_ac\n" +
-                " and unid_ac.id_unid_ac='1'",null);
+                " and unid_ac.id_unid_ac='2'",null);
 
         while(cursor.moveToNext()){
             info = new ClsInfoLogin();
@@ -220,7 +259,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
             Log.i("Unidad",info.getCarrera().toString());
 
-            carrerasList.add(info);
+            carrerasListTulum.add(info);
 
         }
 
@@ -230,23 +269,21 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
     private void obtenerListaCarrerasTulum() {
 
-        listaCarreras = new ArrayList<String>();
-        listaCarreras.add("Seleccione una carrera");
+        listaCarrerasTulum = new ArrayList<String>();
+        listaCarrerasTulum.add("Seleccione una carrera");
 
-        for(int i=0; i<carrerasList.size();i++){
+        for(int i=0; i<carrerasListTulum.size();i++){
 
-            listaCarreras.add((carrerasList.get(i).getCarrera()));
+            listaCarrerasTulum.add((carrerasListTulum.get(i).getCarrera()));
         }
     }
 
     private void desplegarListaCarrerasTulum(){
 
-        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarreras);
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarrerasTulum);
         carreraspinner.setAdapter(adaptador);
 
     }
-
-
     //#########################FIN TULUM#####################//
 
 
