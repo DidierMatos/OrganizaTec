@@ -44,7 +44,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
 
         consultarListaUnidades();
-        consultarListaCarreras();
+        consultarListaCarrerasFCP();
         consultarListaSemestre();
 
 
@@ -64,7 +64,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
                     case 1:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
-                        desplegarListaCarreras();
+                        desplegarListaCarrerasFCP();
 
                         carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
@@ -102,7 +102,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                         break;
                     case 2:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 2", Toast.LENGTH_LONG).show();
-                        
+
                     case 3:
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 3", Toast.LENGTH_LONG).show();
                     case 4:
@@ -151,7 +151,9 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private void consultarListaCarreras() {
+    //#########################FELIPE CARRILLO PUERTO#####################//
+
+    private void consultarListaCarrerasFCP() {
 
         SQLiteDatabase db = conn.getReadableDatabase();
 
@@ -173,11 +175,11 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
 
         }
 
-        obtenerListaCarreras();
+        obtenerListaCarrerasFCP();
 
     }
 
-    private void obtenerListaCarreras() {
+    private void obtenerListaCarrerasFCP() {
 
         listaCarreras = new ArrayList<String>();
         listaCarreras.add("Seleccione una carrera");
@@ -188,12 +190,26 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private void desplegarListaCarreras(){
+    private void desplegarListaCarrerasFCP(){
 
-        ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarreras);
-        carreraspinner.setAdapter(adaptador2);
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCarreras);
+        carreraspinner.setAdapter(adaptador);
 
     }
+    //#########################FIN FELIPE CARRILLO PUERTO#####################//
+
+
+    //#########################TULUM#####################//
+
+    
+
+    //#########################FIN TULUM#####################//
+
+
+    //#########################TIHOSUCO#####################//
+
+    //#########################FIN TIHOSUCO#####################//
+
 
     private void consultarListaSemestre() {
 
