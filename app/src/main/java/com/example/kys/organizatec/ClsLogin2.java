@@ -32,6 +32,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
     private ArrayList<String> listaGrupoChunh;
     private ArrayList<ClsInfoLogin> grupoListChunh;
     private ClsConexionDbHelper conn;
+    private int pospreferload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
         Intent mIntent = getIntent();
         int posunidad2 = mIntent.getIntExtra("posunidad2",0);
-        Toast.makeText(ClsLogin2.this,"Seleccionaste la posicion: " + posunidad2, Toast.LENGTH_LONG).show();
+        //Toast.makeText(ClsLogin2.this,"Seleccionaste la posicion: " + posunidad2, Toast.LENGTH_LONG).show();
         //int positionunidadint = Integer.parseInt(posunidad2);
 
         consultarListaGrupoFCP();
@@ -59,22 +60,28 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         consultarListaGrupoChunh();
         obtenerListaGrupoChunh();
 
+
+
         switch (posunidad2){
             case 1:
                 ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoFCP);
                 grupospinner.setAdapter(adaptador);
+                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
                 break;
             case 2:
                 ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTulum);
                 grupospinner.setAdapter(adaptador2);
+                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
                 break;
             case 3:
                 ArrayAdapter<CharSequence> adaptador3 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTiho);
                 grupospinner.setAdapter(adaptador3);
+                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
                 break;
             case 4:
                 ArrayAdapter<CharSequence> adaptador4 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoChunh);
                 grupospinner.setAdapter(adaptador4);
+                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
                 break;
 
         }
@@ -288,8 +295,9 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             //Toast.makeText(ClsLogin2.this,"Tu nombre es: " + nom, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ClsLogin2.this, ClsHorario.class);
             intent.putExtra("nombrealumno",nom);
-            //int position = grupospinner.getSelectedItemPosition();
-            //PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",position).commit();
+            int posprefer = grupospinner.getSelectedItemPosition();
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",posprefer).commit();
+            Toast.makeText(ClsLogin2.this,"posicion" + posprefer, Toast.LENGTH_LONG).show();
             startActivity(intent);
         }
     }
