@@ -20,10 +20,10 @@ public class ClsHorario extends AppCompatActivity {
         prueba = (TextView) findViewById(R.id.pruebaTxtVw);
 
 
-        Bundle bundle = getIntent().getExtras();
-        String dato = bundle.getString("nombrealumno").toString();
+        //Bundle bundle = getIntent().getExtras();
+        //String dato = bundle.getString("nombrealumno").toString();
 
-        prueba.setText("Bienvenido " + dato);
+        //prueba.setText("Bienvenido " + dato);
 
     }
 }
