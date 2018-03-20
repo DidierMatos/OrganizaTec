@@ -41,7 +41,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.lytclslogin1);
 
         conn = new ClsConexionDbHelper(ClsLogin1.this);
-        SQLiteDatabase database = conn.getReadableDatabase();
+        //SQLiteDatabase database = conn.getReadableDatabase();
 
         unidadspinner = (Spinner) findViewById(R.id.spnUnidad);
         carreraspinner = (Spinner) findViewById(R.id.spnCarrera);

@@ -1,9 +1,12 @@
 package com.example.kys.organizatec;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,59 +16,43 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener,Serializable{
     private String nom;
     private EditText nombre;
     private Button finalizar;
     private Spinner grupospinner;
+    private ArrayList<String> listaGrupo;
+    private ArrayList<ClsInfoLogin> grupoList;
+    private ClsConexionDbHelper conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lytclslogin2);
 
+        conn = new ClsConexionDbHelper(ClsLogin2.this);
+
         nombre = (EditText)findViewById(R.id.editNombre);
         finalizar = (Button)findViewById(R.id.btnFinalizar);
-
         finalizar.setOnClickListener(this);
 
-        grupospinner = (Spinner) findViewById(R.id.spnGrupo);
-        final String []grupo = {"Seleccione su Grupo","A", "B", "C", "D"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,grupo);
-        grupospinner.setAdapter(adapter);
+        consultarListaGrupo();
+        obtenerListaGrupo();
 
-        final Spinner cmbgrupo;
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupo);
+        grupospinner.setAdapter(adaptador);
 
-        cmbgrupo = (Spinner) findViewById(R.id.spnGrupo);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        cmbgrupo.setAdapter(adapter);
 
-        int position = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(position);
-        cmbgrupo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        grupospinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-
-                String select = cmbgrupo.getSelectedItem().toString();
-                if (select.equals("A")){
-
+                SQLiteDatabase db = conn.getReadableDatabase();
+                String selected = parent.getItemAtPosition(0).toString();
+              if (position==1){
+                    Toast.makeText(ClsLogin2.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
                 }
-
-                String select2 = cmbgrupo.getSelectedItem().toString();
-                if (select2.equals("B")){
-
-                }
-                String select3 = cmbgrupo.getSelectedItem().toString();
-                if (select3.equals("C")){
-
-                }
-                String select4 = cmbgrupo.getSelectedItem().toString();
-                if (select4.equals("D")){
-
-                }
-
             }
 
             @Override
@@ -76,6 +63,44 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
 
     }
+
+
+    private void consultarListaGrupo() {
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        grupoList = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select grupo.categorias\n" +
+                "from unid_ac,grupo\n" +
+                "where unid_ac.id_unid_ac=grupo.id_unid_ac \n" +
+                "and unid_ac.id_unid_ac='1'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setGrupo(cursor.getString(0));
+
+            Log.i("Grupo",info.getGrupo().toString());
+
+            grupoList.add(info);
+
+        }
+
+        obtenerListaGrupo();
+
+    }
+
+    private void obtenerListaGrupo() {
+
+        listaGrupo = new ArrayList<String>();
+        listaGrupo.add("Seleccione un grupo");
+
+        for(int i=0; i<grupoList.size();i++){
+
+            listaGrupo.add((grupoList.get(i).getGrupo()));
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
