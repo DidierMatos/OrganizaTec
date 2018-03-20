@@ -27,6 +27,10 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
     private ArrayList<ClsInfoLogin> grupoListFCP;
     private ArrayList<String> listaGrupoTulum;
     private ArrayList<ClsInfoLogin> grupoListTulum;
+    private ArrayList<String> listaGrupoTiho;
+    private ArrayList<ClsInfoLogin> grupoListTiho;
+    private ArrayList<String> listaGrupoChunh;
+    private ArrayList<ClsInfoLogin> grupoListChunh;
     private ClsConexionDbHelper conn;
 
     @Override
@@ -50,6 +54,10 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         obtenerListaGrupoFCP();
         consultarListaGrupoTulum();
         obtenerListaGrupoTulum();
+        consultarListaGrupoTiho();
+        obtenerListaGrupoTiho();
+        consultarListaGrupoChunh();
+        obtenerListaGrupoChunh();
 
         switch (posunidad2){
             case 1:
@@ -59,6 +67,14 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             case 2:
                 ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTulum);
                 grupospinner.setAdapter(adaptador2);
+                break;
+            case 3:
+                ArrayAdapter<CharSequence> adaptador3 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTiho);
+                grupospinner.setAdapter(adaptador3);
+                break;
+            case 4:
+                ArrayAdapter<CharSequence> adaptador4 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoChunh);
+                grupospinner.setAdapter(adaptador4);
                 break;
 
         }
@@ -161,6 +177,79 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         for(int i=0; i<grupoListTulum.size();i++){
 
             listaGrupoTulum.add((grupoListTulum.get(i).getGrupo()));
+        }
+    }
+
+    private void consultarListaGrupoTiho() {
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        grupoListTiho = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select grupo.categorias\n" +
+                "from unid_ac,grupo\n" +
+                "where unid_ac.id_unid_ac=grupo.id_unid_ac \n" +
+                "and unid_ac.id_unid_ac='3'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setGrupo(cursor.getString(0));
+
+            Log.i("Grupo",info.getGrupo().toString());
+
+            grupoListTiho.add(info);
+
+        }
+
+        obtenerListaGrupoTiho();
+
+    }
+
+    private void obtenerListaGrupoTiho() {
+
+        listaGrupoTiho = new ArrayList<String>();
+        listaGrupoTiho.add("Seleccione un grupo");
+
+        for(int i=0; i<grupoListTiho.size();i++){
+
+            listaGrupoTiho.add((grupoListTiho.get(i).getGrupo()));
+        }
+    }
+
+
+    private void consultarListaGrupoChunh() {
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        grupoListChunh = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select grupo.categorias\n" +
+                "from unid_ac,grupo\n" +
+                "where unid_ac.id_unid_ac=grupo.id_unid_ac \n" +
+                "and unid_ac.id_unid_ac='4'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setGrupo(cursor.getString(0));
+
+            Log.i("Grupo",info.getGrupo().toString());
+
+            grupoListChunh.add(info);
+
+        }
+
+        obtenerListaGrupoChunh();
+
+    }
+
+    private void obtenerListaGrupoChunh() {
+
+        listaGrupoChunh = new ArrayList<String>();
+        listaGrupoChunh.add("Seleccione un grupo");
+
+        for(int i=0; i<grupoListChunh.size();i++){
+
+            listaGrupoChunh.add((grupoListChunh.get(i).getGrupo()));
         }
     }
 
