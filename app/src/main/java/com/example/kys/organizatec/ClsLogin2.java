@@ -39,8 +39,14 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         grupospinner = (Spinner) findViewById(R.id.spnGrupo);
         finalizar.setOnClickListener(this);
 
-        consultarListaGrupo();
-        obtenerListaGrupo();
+
+        consultarListaGrupoFCP();
+        obtenerListaGrupoFCP();
+
+        //Bundle bundle = getIntent().getExtras();
+        //String dato = bundle.getString("nombrealumno").toString();
+
+        //prueba.setText("Bienvenido " + dato);
 
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupo);
         grupospinner.setAdapter(adaptador);
@@ -49,11 +55,14 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         grupospinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SQLiteDatabase db = conn.getReadableDatabase();
-                String selected = parent.getItemAtPosition(0).toString();
+ /*           SQLiteDatabase db = conn.getReadableDatabase();
+              String selected = parent.getItemAtPosition(0).toString();
               if (position==1){
                     Toast.makeText(ClsLogin2.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
-                }
+                }*/
+
+
+
             }
 
             @Override
@@ -66,7 +75,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
     }
 
 
-    private void consultarListaGrupo() {
+    private void consultarListaGrupoFCP() {
         SQLiteDatabase db = conn.getReadableDatabase();
 
         ClsInfoLogin info = null;
@@ -87,11 +96,11 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
         }
 
-        obtenerListaGrupo();
+        obtenerListaGrupoFCP();
 
     }
 
-    private void obtenerListaGrupo() {
+    private void obtenerListaGrupoFCP() {
 
         listaGrupo = new ArrayList<String>();
         listaGrupo.add("Seleccione un grupo");
