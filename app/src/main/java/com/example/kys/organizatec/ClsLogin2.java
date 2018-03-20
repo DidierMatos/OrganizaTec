@@ -1,6 +1,7 @@
 package com.example.kys.organizatec;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
@@ -32,7 +33,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
     private ArrayList<String> listaGrupoChunh;
     private ArrayList<ClsInfoLogin> grupoListChunh;
     private ClsConexionDbHelper conn;
-    private int pospreferload;
+    private int pospreferload,posprefer,newposprefer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -295,7 +296,8 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             //Toast.makeText(ClsLogin2.this,"Tu nombre es: " + nom, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ClsLogin2.this, ClsHorario.class);
             intent.putExtra("nombrealumno",nom);
-            int posprefer = grupospinner.getSelectedItemPosition();
+            posprefer = grupospinner.getSelectedItemPosition();
+            newposprefer = posprefer;
             PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",posprefer).commit();
             Toast.makeText(ClsLogin2.this,"posicion" + posprefer, Toast.LENGTH_LONG).show();
             startActivity(intent);
@@ -306,4 +308,5 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
         return nombre.length()>4;
     }
+
 }
