@@ -71,17 +71,17 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             case 2:
                 ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTulum);
                 grupospinner.setAdapter(adaptador2);
-                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                //pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
                 break;
             case 3:
                 ArrayAdapter<CharSequence> adaptador3 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTiho);
                 grupospinner.setAdapter(adaptador3);
-                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                //pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
                 break;
             case 4:
                 ArrayAdapter<CharSequence> adaptador4 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoChunh);
                 grupospinner.setAdapter(adaptador4);
-                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                //pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
                 break;
 
         }
