@@ -41,26 +41,28 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         grupospinner = (Spinner) findViewById(R.id.spnGrupo);
         finalizar.setOnClickListener(this);
 
-      Bundle bundle = getIntent().getExtras();
-        String positionunidad = bundle.getString("positionunidad").toString();
-        int positionunidadint = Integer.parseInt(positionunidad);
+        Intent mIntent = getIntent();
+        int posunidad2 = mIntent.getIntExtra("posunidad2",0);
+        Toast.makeText(ClsLogin2.this,"Seleccionaste la posicion: " + posunidad2, Toast.LENGTH_LONG).show();
+        //int positionunidadint = Integer.parseInt(posunidad2);
 
-        switch(positionunidadint) {
+        consultarListaGrupoFCP();
+        obtenerListaGrupoFCP();
+        consultarListaGrupoTulum();
+        obtenerListaGrupoTulum();
+
+        switch (posunidad2){
             case 1:
                 ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoFCP);
                 grupospinner.setAdapter(adaptador);
-                consultarListaGrupoFCP();
-                obtenerListaGrupoFCP();
                 break;
             case 2:
                 ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTulum);
                 grupospinner.setAdapter(adaptador2);
-                consultarListaGrupoTulum();
-                obtenerListaGrupoTulum();
                 break;
-            case 3:
-                break;
+
         }
+
 
 
         //prueba.setText("Bienvenido " + dato);

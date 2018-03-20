@@ -14,9 +14,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener{
+public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener,Serializable{
 
     private Button continuar;
     private Spinner unidadspinner, carreraspinner, semestrespinner;
@@ -502,9 +503,12 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.continuar:
+                int posunidad2 = unidadspinner.getSelectedItemPosition();
+                String posunidad2S = Integer.toString(posunidad2);
+                //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion" + posunidad2, Toast.LENGTH_LONG).show();
+
                 Intent intent = new Intent(ClsLogin1.this, ClsLogin2.class);
-                int positionunidad2 = unidadspinner.getSelectedItemPosition();
-                intent.putExtra("positionunidad",positionunidad2);
+                intent.putExtra("posunidad2",posunidad2);
                 startActivity(intent);
         }
 
