@@ -68,23 +68,26 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             case 1:
                 ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoFCP);
                 grupospinner.setAdapter(adaptador);
-                pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
-                //checkPosPrefer();
+                //pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                checkPosPrefer();
                 break;
             case 2:
                 ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTulum);
                 grupospinner.setAdapter(adaptador2);
                 //pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                checkPosPrefer();
                 break;
             case 3:
                 ArrayAdapter<CharSequence> adaptador3 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTiho);
                 grupospinner.setAdapter(adaptador3);
                 //pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                checkPosPrefer();
                 break;
             case 4:
                 ArrayAdapter<CharSequence> adaptador4 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoChunh);
                 grupospinner.setAdapter(adaptador4);
                 //pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                checkPosPrefer();
                 break;
 
         }
@@ -267,12 +270,13 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
         if (posprefer!=newposprefer){
             preferencias.edit().remove("position").commit();
-            posprefer = grupospinner.getSelectedItemPosition();
-            newposprefer = posprefer;
-            PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",posprefer).commit();
+            //grupospinner.setSelection(pospreferload); test comprobacion de limpieza de posprefer
+            savePosPrefer();
+
 
         }else{
-            pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+            pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0);
+            grupospinner.setSelection(pospreferload);
         }
 
     }
