@@ -33,7 +33,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
     private ArrayList<String> listaSemestre;
     private ArrayList<ClsInfoLogin> semestreList;
     private ClsConexionDbHelper conn;
-    private int positionunidad2;
+    //private int positionunidad2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                         //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show(); //TEST DE CASE 1
                         //int positionunidad2 = unidadspinner.getSelectedItemPosition(); //TEST POSITION INTENT Y SHARED
                         //PreferenceManager.getDefaultSharedPreferences(ClsLogin1.this).edit().putInt("position",positionunidad2 ).commit();
-                        positionunidad2 = PreferenceManager.getDefaultSharedPreferences(ClsLogin1.this).getInt("position", 0); unidadspinner.setSelection(positionunidad2); //
+                        //positionunidad2 = PreferenceManager.getDefaultSharedPreferences(ClsLogin1.this).getInt("position", 0); unidadspinner.setSelection(positionunidad2); //
                         //Toast.makeText(ClsLogin1.this,"La posicion que escogiste fue la " + positionunidad + "  " + positionunidad2, Toast.LENGTH_LONG).show(); //IMPRESION POSITION
                         desplegarListaCarrerasFCP();
 
@@ -503,6 +503,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         {
             case R.id.continuar:
                 Intent intent = new Intent(ClsLogin1.this, ClsLogin2.class);
+                int positionunidad2 = unidadspinner.getSelectedItemPosition();
                 intent.putExtra("positionunidad",positionunidad2);
                 startActivity(intent);
         }

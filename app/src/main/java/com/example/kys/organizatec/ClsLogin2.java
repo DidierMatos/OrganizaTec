@@ -23,8 +23,10 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
     private EditText nombre;
     private Button finalizar;
     private Spinner grupospinner;
-    private ArrayList<String> listaGrupo;
-    private ArrayList<ClsInfoLogin> grupoList;
+    private ArrayList<String> listaGrupoFCP;
+    private ArrayList<ClsInfoLogin> grupoListFCP;
+    private ArrayList<String> listaGrupoTulum;
+    private ArrayList<ClsInfoLogin> grupoListTulum;
     private ClsConexionDbHelper conn;
 
     @Override
@@ -39,17 +41,29 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         grupospinner = (Spinner) findViewById(R.id.spnGrupo);
         finalizar.setOnClickListener(this);
 
+      Bundle bundle = getIntent().getExtras();
+        String positionunidad = bundle.getString("positionunidad").toString();
+        int positionunidadint = Integer.parseInt(positionunidad);
 
-        consultarListaGrupoFCP();
-        obtenerListaGrupoFCP();
+        switch(positionunidadint) {
+            case 1:
+                ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoFCP);
+                grupospinner.setAdapter(adaptador);
+                consultarListaGrupoFCP();
+                obtenerListaGrupoFCP();
+                break;
+            case 2:
+                ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTulum);
+                grupospinner.setAdapter(adaptador2);
+                consultarListaGrupoTulum();
+                obtenerListaGrupoTulum();
+                break;
+            case 3:
+                break;
+        }
 
-        //Bundle bundle = getIntent().getExtras();
-        //String dato = bundle.getString("nombrealumno").toString();
 
         //prueba.setText("Bienvenido " + dato);
-
-        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupo);
-        grupospinner.setAdapter(adaptador);
 
         //int position = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(position);
         grupospinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,7 +93,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         SQLiteDatabase db = conn.getReadableDatabase();
 
         ClsInfoLogin info = null;
-        grupoList = new ArrayList<ClsInfoLogin>();
+        grupoListFCP = new ArrayList<ClsInfoLogin>();
         Cursor cursor = db.rawQuery("select grupo.categorias\n" +
                 "from unid_ac,grupo\n" +
                 "where unid_ac.id_unid_ac=grupo.id_unid_ac \n" +
@@ -92,7 +106,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
             Log.i("Grupo",info.getGrupo().toString());
 
-            grupoList.add(info);
+            grupoListFCP.add(info);
 
         }
 
@@ -102,15 +116,51 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
     private void obtenerListaGrupoFCP() {
 
-        listaGrupo = new ArrayList<String>();
-        listaGrupo.add("Seleccione un grupo");
+        listaGrupoFCP = new ArrayList<String>();
+        listaGrupoFCP.add("Seleccione un grupo");
 
-        for(int i=0; i<grupoList.size();i++){
+        for(int i=0; i<grupoListFCP.size();i++){
 
-            listaGrupo.add((grupoList.get(i).getGrupo()));
+            listaGrupoFCP.add((grupoListFCP.get(i).getGrupo()));
         }
     }
 
+
+    private void consultarListaGrupoTulum() {
+        SQLiteDatabase db = conn.getReadableDatabase();
+
+        ClsInfoLogin info = null;
+        grupoListTulum = new ArrayList<ClsInfoLogin>();
+        Cursor cursor = db.rawQuery("select grupo.categorias\n" +
+                "from unid_ac,grupo\n" +
+                "where unid_ac.id_unid_ac=grupo.id_unid_ac \n" +
+                "and unid_ac.id_unid_ac='2'",null);
+
+        while(cursor.moveToNext()){
+            info = new ClsInfoLogin();
+            //info.setId(cursor.getInt(0));
+            info.setGrupo(cursor.getString(0));
+
+            Log.i("Grupo",info.getGrupo().toString());
+
+            grupoListTulum.add(info);
+
+        }
+
+        obtenerListaGrupoTulum();
+
+    }
+
+    private void obtenerListaGrupoTulum() {
+
+        listaGrupoTulum = new ArrayList<String>();
+        listaGrupoTulum.add("Seleccione un grupo");
+
+        for(int i=0; i<grupoListTulum.size();i++){
+
+            listaGrupoTulum.add((grupoListTulum.get(i).getGrupo()));
+        }
+    }
 
     @Override
     public void onClick(View view) {
