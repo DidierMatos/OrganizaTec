@@ -36,6 +36,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
 
         nombre = (EditText)findViewById(R.id.editNombre);
         finalizar = (Button)findViewById(R.id.btnFinalizar);
+        grupospinner = (Spinner) findViewById(R.id.spnGrupo);
         finalizar.setOnClickListener(this);
 
         consultarListaGrupo();
@@ -44,7 +45,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupo);
         grupospinner.setAdapter(adaptador);
 
-
+        //int position = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(position);
         grupospinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -137,8 +138,8 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             //Toast.makeText(ClsLogin2.this,"Tu nombre es: " + nom, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ClsLogin2.this, ClsHorario.class);
             //intent.putExtra("nombrealumno",nom);
-            int position = grupospinner.getSelectedItemPosition();
-            PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",position).commit();
+            //int position = grupospinner.getSelectedItemPosition();
+            //PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",position).commit();
             startActivity(intent);
         }
     }
