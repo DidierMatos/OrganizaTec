@@ -4,6 +4,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+/**
+ * Created by Didier on 14/03/2018.
+ */
 
 public class ClsHorario extends AppCompatActivity {
 

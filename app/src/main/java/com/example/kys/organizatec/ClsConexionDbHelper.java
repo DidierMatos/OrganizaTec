@@ -5,7 +5,7 @@ import android.content.Context;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 /**
- * Created by Didier on 14/03/2018.
+ * Created by Lily on 14/03/2018.
  */
 
 public class ClsConexionDbHelper extends SQLiteAssetHelper {
