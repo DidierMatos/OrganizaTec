@@ -1,6 +1,7 @@
 package com.example.kys.organizatec;
 
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +41,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         cmbgrupo.setAdapter(adapter);
 
+        int position = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(position);
         cmbgrupo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
 
@@ -110,6 +112,8 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             //Toast.makeText(ClsLogin2.this,"Tu nombre es: " + nom, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ClsLogin2.this, ClsHorario.class);
             intent.putExtra("nombrealumno",nom);
+            //int position = grupospinner.getSelectedItemPosition();
+            //PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",position).commit();
             startActivity(intent);
         }
     }

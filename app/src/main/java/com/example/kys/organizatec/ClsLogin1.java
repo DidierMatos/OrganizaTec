@@ -3,6 +3,7 @@ package com.example.kys.organizatec;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,6 +58,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         consultarListaSemestre();
 
 
+
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaUnidades);
         unidadspinner.setAdapter(adaptador);
 
@@ -72,7 +74,11 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                 switch(positionunidad){
 
                     case 1:
-                        //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ClsLogin1.this,"Seleccionaste la posicion 1", Toast.LENGTH_LONG).show(); //TEST DE CASE 1
+                        //int positionunidad2 = unidadspinner.getSelectedItemPosition(); //TEST POSITION INTENT Y SHARED
+                        //PreferenceManager.getDefaultSharedPreferences(ClsLogin1.this).edit().putInt("position",positionunidad2 ).commit();
+                        //int position = PreferenceManager.getDefaultSharedPreferences(ClsLogin1.this).getInt("position", 0); unidadspinner.setSelection(position);
+                        //Toast.makeText(ClsLogin1.this,"La posicion que escogiste fue la " + positionunidad + "  " + positionunidad2, Toast.LENGTH_LONG).show(); //IMPRESION POSITION
                         desplegarListaCarrerasFCP();
 
                         carreraspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -80,6 +86,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
                             public void onItemSelected(AdapterView<?> parent, View view, int pos_car_fcp, long id) {
                                 switch(pos_car_fcp){
                                     case 1: //IA
+
                                         desplegarListaSemestre();
                                         seleccionarSemestre();
                                         break;
@@ -495,6 +502,7 @@ public class ClsLogin1 extends AppCompatActivity implements View.OnClickListener
         {
             case R.id.continuar:
                 Intent intent = new Intent(ClsLogin1.this, ClsLogin2.class);
+                //intent.putExtra("positionunidad",positionunidad)
                 startActivity(intent);
         }
 

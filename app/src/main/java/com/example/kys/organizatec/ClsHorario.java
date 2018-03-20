@@ -1,5 +1,6 @@
 package com.example.kys.organizatec;
 
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -15,7 +16,9 @@ public class ClsHorario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lytclshorario);
 
+
         prueba = (TextView) findViewById(R.id.pruebaTxtVw);
+
 
         Bundle bundle = getIntent().getExtras();
         String dato = bundle.getString("nombrealumno").toString();
