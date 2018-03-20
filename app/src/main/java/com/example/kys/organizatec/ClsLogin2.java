@@ -34,6 +34,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
     private ArrayList<ClsInfoLogin> grupoListChunh;
     private ClsConexionDbHelper conn;
     private int pospreferload,posprefer,newposprefer;
+    private SharedPreferences preferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
                 ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoFCP);
                 grupospinner.setAdapter(adaptador);
                 pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+                //checkPosPrefer();
                 break;
             case 2:
                 ArrayAdapter<CharSequence> adaptador2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaGrupoTulum);
@@ -261,6 +263,30 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    private void checkPosPrefer() {
+
+        if (posprefer!=newposprefer){
+            preferencias.edit().remove("position").commit();
+            posprefer = grupospinner.getSelectedItemPosition();
+            newposprefer = posprefer;
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",posprefer).commit();
+
+        }else{
+            pospreferload = PreferenceManager.getDefaultSharedPreferences(this).getInt("position", 0); grupospinner.setSelection(pospreferload);
+        }
+
+    }
+
+
+    private void savePosPrefer(){
+        posprefer = grupospinner.getSelectedItemPosition();
+        newposprefer = posprefer;
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",posprefer).commit();
+        preferencias = getSharedPreferences("position",0) ;
+
+        Toast.makeText(ClsLogin2.this,"posicion" + posprefer, Toast.LENGTH_LONG).show();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId())
@@ -296,10 +322,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
             //Toast.makeText(ClsLogin2.this,"Tu nombre es: " + nom, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ClsLogin2.this, ClsHorario.class);
             intent.putExtra("nombrealumno",nom);
-            posprefer = grupospinner.getSelectedItemPosition();
-            newposprefer = posprefer;
-            PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",posprefer).commit();
-            Toast.makeText(ClsLogin2.this,"posicion" + posprefer, Toast.LENGTH_LONG).show();
+            savePosPrefer();
             startActivity(intent);
         }
     }
