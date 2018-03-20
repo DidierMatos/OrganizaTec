@@ -287,7 +287,7 @@ public class ClsLogin2 extends AppCompatActivity implements View.OnClickListener
         {
             //Toast.makeText(ClsLogin2.this,"Tu nombre es: " + nom, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ClsLogin2.this, ClsHorario.class);
-            //intent.putExtra("nombrealumno",nom);
+            intent.putExtra("nombrealumno",nom);
             //int position = grupospinner.getSelectedItemPosition();
             //PreferenceManager.getDefaultSharedPreferences(this).edit().putInt("position",position).commit();
             startActivity(intent);
