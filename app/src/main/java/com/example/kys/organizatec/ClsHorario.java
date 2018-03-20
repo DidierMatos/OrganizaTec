@@ -24,9 +24,9 @@ public class ClsHorario extends AppCompatActivity {
 
 
         Bundle bundle = getIntent().getExtras();
-        String dato = bundle.getString("nombrealumno").toString();
+        String nombrealumno = bundle.getString("nombrealumno").toString();
 
-        prueba.setText("Bienvenido " + dato);
+        prueba.setText("Bienvenido " + nombrealumno);
 
     }
 }
