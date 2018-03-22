@@ -22,5 +22,4 @@
         <activity android:name=".ClsLogin2" />
         <activity android:name=".ClsHorario"></activity>
     </application>
-
 </manifest>
